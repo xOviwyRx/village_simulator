@@ -5,8 +5,14 @@ class Farm {
 
     function addNewAnimal($type){
         $animal = new $type($this->lastNumber);
-        $this->lastNumber++;
-        $this->animals[] = $animal;
+        $parents = class_parents($animal);
+        if (in_array('FarmAnimal', $parents)){
+          $this->lastNumber++;
+          $this->animals[] = $animal;
+        }
+        else {
+          throw new Exception("$type is not farm animal!");
+        }
     }
 
     function getCountOfAnimalsByTypes(){
@@ -33,5 +39,20 @@ class Farm {
           $total[$key] = $value;
       }
       return $total;
+    }
+
+    function showAnimals(){
+      $countAnimals = $this->getCountOfAnimalsByTypes();
+      echo "Now we have: \n";
+      foreach ($countAnimals as $type => $count){
+        echo "{$type}s: $count\n";
+      }
+    }
+
+    function showProduction($totalProduction){
+      echo "Now our production: \n";
+      foreach ($totalProduction as $production => $count){
+        echo "$production: $count\n";
+      }
     }
 }
