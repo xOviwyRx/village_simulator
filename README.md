@@ -1,1 +1,1 @@
-# Console Village Simulator representing work with OOP
+# Console Village Simulator representing OOP on PHP
